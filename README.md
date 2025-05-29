@@ -53,7 +53,7 @@ SSL_Project/
 ## Setup & Installation
 
 ```bash
-git clone https://github.com/your_username/ssl_project.git
+git clone https://github.com/tanishk-ou/ssl_project.git
 cd ssl_project
 pip install -r requirements.txt
 ```
@@ -89,16 +89,22 @@ python evaluate_models.py
 | SimCLR | 34.25%   | 0.3012   |
 | MAE    | 25.08%   | 0.2337   |
 
-## Dataset Folder Structure
+## Dataset
 
+The dataset is not included in this repository due to size restrictions.
+You can download it using:
+```bash
+pip install gdown
+gdown https://drive.google.com/uc?id=1BVpkgbxN21kTcIGsv4T7zIyT2egxIufK
+unzip ssl_dataset_resized.zip -d ssl_dataset/
+```
+File structure of the un-zipped folder:
 ```
 ssl_dataset/
 ├── train_unlabeled/
 ├── train_labeled/
 └── val/
 ```
-
-Place your dataset inside `ssl_dataset/` directory following the above structure.
 
 ## References
 
