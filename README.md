@@ -108,10 +108,10 @@ ssl_dataset/
 
 ## References
 
-- SimCLR - Chen et al., ICML 2020
-- MAE - He et al., CVPR 2022
-- ResNet - He et al., CVPR 2016
-- Vision Transformers - Dosovitskiy et al., ICLR 2021
+- SimCLR - Chen Ting, ICML 2020
+- MAE - He Kaiming, CVPR 2022
+- ResNet - He Kaiming, CVPR 2016
+- Vision Transformers - Dosovitskiy Alexey, ICLR 2021
 - PyTorch, HuggingFace Docs
 
 ## Acknowledgements
