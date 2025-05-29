@@ -4,7 +4,7 @@ This repository contains a complete implementation of self-supervised learning u
 - SimCLR (Contrastive Learning)
 - MAE (Masked Autoencoders)
 
-## 👨‍💻 Author
+## Author
 
 - **Name:** Tanishk Gopalani  
 - **Roll No:** 23/EE/266  
@@ -12,7 +12,7 @@ This repository contains a complete implementation of self-supervised learning u
 - **College:** Delhi Technological University (DTU)  
 - **Branch:** Electrical Engineering  
 
-## 📂 Folder Structure
+## Folder Structure
 
 ```
 SSL_Project/
@@ -50,7 +50,7 @@ SSL_Project/
 ├── evaluate_models.py
 ```
 
-## 🔧 Setup & Installation
+## Setup & Installation
 
 ```bash
 git clone https://github.com/your_username/ssl_project.git
@@ -58,7 +58,7 @@ cd ssl_project
 pip install -r requirements.txt
 ```
 
-## 🧠 Pretraining
+## Pretraining
 
 ### SimCLR Pretraining
 ```bash
@@ -70,26 +70,26 @@ python main_simclr.py
 python main_mae.py
 ```
 
-## 📈 Linear Evaluation
+## Linear Evaluation
 
 ```bash
 python linear_eval.py
 ```
 
-## 🧪 Final Evaluation
+## Final Evaluation
 
 ```bash
 python evaluate_models.py
 ```
 
-## 🧾 Results
+## Results
 
 | Method | Accuracy | F1 Score |
 |--------|----------|----------|
 | SimCLR | 34.25%   | 0.3012   |
 | MAE    | 25.08%   | 0.2337   |
 
-## 📁 Dataset Folder Structure
+## Dataset Folder Structure
 
 ```
 ssl_dataset/
@@ -100,7 +100,7 @@ ssl_dataset/
 
 Place your dataset inside `ssl_dataset/` directory following the above structure.
 
-## 📚 References
+## References
 
 - SimCLR - Chen et al., ICML 2020
 - MAE - He et al., CVPR 2022
@@ -108,6 +108,6 @@ Place your dataset inside `ssl_dataset/` directory following the above structure
 - Vision Transformers - Dosovitskiy et al., ICLR 2021
 - PyTorch, HuggingFace Docs
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 Thanks to AIMS-DTU and the evaluation team for providing this opportunity for me. This project task helped me understand Self-supervised visual learning really well.
