@@ -48,6 +48,7 @@ SSL_Project/
 ├── main_mae.py
 ├── linear_eval.py
 ├── evaluate_models.py
+├── download_checkpoints.py
 ```
 
 ## Setup & Installation
@@ -112,7 +113,7 @@ Download all pretrained `.pth` files using:
 
 ```bash
 pip install gdown
-python scripts/download_checkpoints.py
+python download_checkpoints.py
 ```
 
 ## References
