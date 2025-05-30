@@ -70,13 +70,13 @@ python main_simclr.py
 python main_mae.py
 ```
 
-## Linear Evaluation
+### Linear Evaluation
 
 ```bash
 python linear_eval.py
 ```
 
-## Final Evaluation
+### Final Evaluation
 
 ```bash
 python evaluate_models.py
@@ -104,6 +104,15 @@ ssl_dataset/
 ├── train_unlabeled/
 ├── train_labeled/
 └── val/
+```
+
+## 📦 Checkpoints
+
+Download all pretrained `.pth` files using:
+
+```bash
+pip install gdown
+python scripts/download_checkpoints.py
 ```
 
 ## References
