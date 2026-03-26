@@ -9,10 +9,9 @@ from pathlib import Path
 class BaseTrainer(ABC):
     """Abstract base trainer class for all SSL methods"""
 
-    def __init__(self, model, train_loader, val_loader, config, device='cuda', checkpoint_dir=None):
+    def __init__(self, model, train_loader, config, device='cuda', checkpoint_dir=None):
         self.model = model
         self.train_loader = train_loader
-        self.val_loader = val_loader
         self.config = config
         self.device = torch.device(device)
         self.checkpoint_dir = Path(checkpoint_dir) if checkpoint_dir else Path('./checkpoints')
@@ -22,7 +21,7 @@ class BaseTrainer(ABC):
         self.logger = logging.getLogger(self.__class__.__name__)
 
     @abstractmethod
-    def train_step(self, batch):
+    def train_step(self, batch, optimizer, epoch, total_epochs):
         """Single training step - must be implemented by subclasses"""
         pass
 
@@ -46,7 +45,7 @@ class BaseTrainer(ABC):
 
             pbar = tqdm(self.train_loader, desc=f"Epoch {epoch + 1}/{epochs}")
             for batch in pbar:
-                loss = self.train_step(batch, optimizer)
+                loss = self.train_step(batch, optimizer, epoch, epochs)
                 epoch_loss += loss.item()
                 num_batches += 1
                 pbar.set_postfix({"loss": epoch_loss / num_batches})

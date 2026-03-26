@@ -45,32 +45,3 @@ class SimCLRModel(nn.Module):
     def get_encoder(self):
         """Get encoder without projection head"""
         return self.encoder
-
-    def loss(self, z1, z2):
-        """SimCLR contrastive loss"""
-        z1 = F.normalize(z1, dim=1)
-        z2 = F.normalize(z2, dim=1)
-
-        # Concatenate representations from both views
-        representations = torch.cat([z1, z2], dim=0)
-
-        # Compute similarity matrix
-        similarity_matrix = torch.matmul(representations, representations.T)
-
-        # Create mask to exclude self-similarity
-        mask = torch.eye(representations.size(0), dtype=torch.bool).to(z1.device)
-        similarity_matrix.masked_fill_(mask, float('-inf'))
-
-        # Apply temperature
-        logits = similarity_matrix / self.temperature
-
-        # Labels: positive pairs
-        batch_size = z1.size(0)
-        labels = torch.cat([torch.arange(batch_size) + batch_size, torch.arange(batch_size)]).to(z1.device)
-        targets = torch.arange(2 * batch_size).to(z1.device)
-        targets[torch.arange(batch_size)] = torch.arange(batch_size) + batch_size
-        targets[torch.arange(batch_size) + batch_size] = torch.arange(batch_size)
-
-        # Cross-entropy loss
-        loss_1 = F.cross_entropy(logits, targets)
-        return loss_1

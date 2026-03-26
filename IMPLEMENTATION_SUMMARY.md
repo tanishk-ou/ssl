@@ -2,17 +2,17 @@
 
 ## Overview
 
-This project implements three state-of-the-art self-supervised learning methods with a production-grade codebase redesign achieving **76-132% accuracy improvements** over the previous iteration.
+This project implements three self-supervised learning methods: DINO, SimCLR, and MAE. The codebase uses a modular architecture with shared infrastructure components.
 
-## Performance Improvements
+## Performance Metrics
 
-| Method | Previous | Current | Improvement |
-|--------|----------|---------|------------|
-| **DINO** | — | 64.06% (linear) | **NEW** ✓ |
-| **SimCLR** | 34.25% | 60.22% (linear) | **+76%** |
-| **MAE** | 25.08% | 58.12% (linear) | **+132%** |
+Evaluation results on the SSL dataset (100 classes, k-NN with k=20):
 
-Evaluation metrics include k-NN (20-neighbor) and linear probe on 100-class dataset with 130K training + 5K validation images.
+| Method | k-NN Accuracy | Linear Probe Accuracy |
+|--------|----------|---------|
+| **DINO** | 56.16% | 64.06% |
+| **SimCLR** | 54.92% | 60.22% |
+| **MAE** | 36.34% | 58.12% |
 
 ## Architecture & Design
 
@@ -60,50 +60,23 @@ Level 3: Shared Infrastructure     → core/ (config, datasets, transforms, base
 - **Linear probe** (PyTorch): Frozen encoder + trainable linear layer
 - Both metrics standard in SSL literature
 
-## Software Engineering Highlights
+## Software Engineering
 
-### Cleanup & Code Quality
-- Removed 14 deprecated files (old entry points, redundant utilities)
-- Removed 5 redundant directories (old modular structure)
-- All 24 Python files pass syntax validation
-- No circular dependencies, all imports resolvable
+### Code Quality
+- All Python files pass syntax validation
+- Modular architecture with clear separation of concerns
+- Shared utilities reduce code duplication
 
 ### Documentation
-- **README.md**: Installation, usage, results, examples
-- **ARCHITECTURE.md**: Design patterns, extensibility guide, adding new methods
-- **requirements.txt**: Versioned dependencies
+- **README.md**: Installation and usage instructions
+- **ARCHITECTURE.md**: Design patterns and architecture overview
+- **requirements.txt**: Dependency specifications
 
-### Git Best Practices
-- `.gitignore`: Proper Python/ML ignores (__pycache__, datasets, logs)
-- `.gitattributes`: Git LFS tracking for 1.5GB model files
-- Clean commit history with descriptive messages
-
-### Reproducibility
-- Training logs preserved for all three methods
-- Evaluation results saved as JSON (configs + metrics)
-- Visualizations included (t-SNE, UMAP, attention maps)
-- Config exported with each run
-
-## Integration & Deployment
-
-**Pre-trained models included**: 1.5GB of production-ready weights
-- DINO (843 MB): Best performance, interpretable attention
-- SimCLR (331 MB): Fast, proven contrastive approach
-- MAE (405 MB): Scalable, efficient reconstruction
-
-**Immediate usage**:
-```bash
-python main.py --method dino          # Train
-python eval.py --method dino          # Evaluate with k-NN + linear probe
-```
+### Configurations and Tools
+- YAML-based configuration for easy customization
+- Consistent error handling across dataset classes
+- Logging for training and evaluation
 
 ## Conclusion
 
-This implementation demonstrates:
-- ✅ **Software Architecture**: Clean, modular, extensible design
-- ✅ **Research Implementation**: Accurate reproduction of three SOTA methods
-- ✅ **Production Quality**: Logging, error handling, reproducibility
-- ✅ **Results-Driven**: 76-132% performance improvements through refined hyperparameters
-- ✅ **Engineering Best Practices**: Version control, documentation, testing mindset
-
-The codebase is immediately usable by researchers and deployment-ready for production systems.
+This implementation provides a working codebase for three SSL methods (DINO, SimCLR, MAE) with evaluation tools and visualization support.

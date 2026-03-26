@@ -59,7 +59,6 @@ def train_simclr(args):
     trainer = SimCLRTrainer(
         model,
         train_loader,
-        None,  # TODO: Add val_loader
         config,
         device=str(config.device),
         checkpoint_dir=config.checkpoint_path
@@ -92,7 +91,6 @@ def train_mae(args):
     trainer = MAETrainer(
         model,
         train_loader,
-        None,
         config,
         device=str(config.device),
         checkpoint_dir=config.checkpoint_path
@@ -128,7 +126,6 @@ def train_dino(args):
     trainer = DINOTrainer(
         model,
         train_loader,
-        None,
         config,
         device=str(config.device),
         checkpoint_dir=config.checkpoint_path

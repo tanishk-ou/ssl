@@ -83,27 +83,6 @@ class Config:
         num_local_crops = 4
         image_size = (224, 224)
 
-    # DINOv2 Configuration
-    class DINOv2:
-        epochs = 1000
-        batch_size = 96
-        lr = 1e-4
-        weight_decay = 0.05
-        llrd_factor = 0.98
-        student_temp = 0.1
-        teacher_temp = 0.07
-        momentum = 0.999
-        prototypes = 4096
-        bottleneck_dim = 128
-        hidden_dim = 768
-        num_local_crops = 2
-        mask_ratio = 0.5
-
-    # DINOv3 Configuration
-    class DINOv3:
-        is_enabled = False
-        gram_teacher_checkpoint = None
-
     # Evaluation Configuration
     class Eval:
         k_knn = 20

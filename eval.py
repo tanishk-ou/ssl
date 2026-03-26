@@ -15,6 +15,7 @@ from pathlib import Path
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 import json
+import numpy as np
 
 from core.config import config
 from core.datasets import get_linear_eval_dataloader, get_val_dataloader
@@ -245,5 +246,4 @@ def main():
 
 
 if __name__ == '__main__':
-    import numpy as np
     main()

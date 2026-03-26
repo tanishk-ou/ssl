@@ -48,16 +48,7 @@ class MAEDataset(Dataset):
                 ).convert('RGB')
                 return self.transform(image)
             except (UnidentifiedImageError, OSError):
-                old_path = os.path.join(self.folder_path, self.image_filenames[index])
-                image_name = os.path.basename(old_path)
-                folder = image_name.split('_')[0]
-                new_path = os.path.join(
-                    os.path.dirname(old_path).replace('unlabeled', 'labeled'),
-                    folder,
-                    image_name
-                )
-                image = Image.open(new_path).convert('RGB')
-                return self.transform(image)
+                index = (index + 1) % len(self.image_filenames)
 
 
 class DINODataset(Dataset):
@@ -74,25 +65,17 @@ class DINODataset(Dataset):
         return len(self.image_filenames)
 
     def __getitem__(self, index):
-        try:
-            image = Image.open(
-                os.path.join(self.folder_path, self.image_filenames[index])
-            ).convert('RGB')
-        except:
-            old_path = os.path.join(self.folder_path, self.image_filenames[index])
-            image_name = os.path.basename(old_path)
-            folder = image_name.split('_')[0]
-            new_path = os.path.join(
-                os.path.dirname(old_path).replace('unlabeled', 'labeled'),
-                folder,
-                image_name
-            )
-            image = Image.open(new_path).convert('RGB')
-
-        crops = self.transform(image)
-        if self.v3:
-            return crops[:2], crops[2:-2], crops[-2:]
-        return crops[:2], crops[2:]
+        while True:
+            try:
+                image = Image.open(
+                    os.path.join(self.folder_path, self.image_filenames[index])
+                ).convert('RGB')
+                crops = self.transform(image)
+                if self.v3:
+                    return crops[:2], crops[2:-2], crops[-2:]
+                return crops[:2], crops[2:]
+            except (UnidentifiedImageError, OSError):
+                index = (index + 1) % len(self.image_filenames)
 
 
 def get_train_dataloader(method="simclr", batch_size=None, config=None):
@@ -167,6 +150,27 @@ def get_val_dataloader(batch_size=256, config=None):
         dataset,
         batch_size=batch_size,
         shuffle=False,
+        num_workers=4,
+        pin_memory=True
+    )
+
+
+def get_linear_eval_dataloader(batch_size=256, config=None):
+    """Get training dataloader for labeled data (linear evaluation)"""
+    if config is None:
+        from core.config import config as cfg
+        config = cfg
+
+    train_folder = os.path.join(config.dataset_path, "train_labeled")
+
+    from core.transforms import get_eval_transforms
+    transform = get_eval_transforms()
+    dataset = ImageFolder(train_folder, transform=transform)
+
+    return DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=True,
         num_workers=4,
         pin_memory=True
     )

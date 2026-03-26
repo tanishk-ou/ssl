@@ -1,14 +1,6 @@
 # Self-Supervised Visual Representation Learning
 
-A comprehensive implementation of modern self-supervised learning methods for visual representation learning. This repository includes three state-of-the-art SSL methods with pre-trained models achieving significant improvements over previous versions.
-
-## Key Improvements
-
-| Method | Previous | Current | Improvement |
-|--------|----------|---------|------------|
-| **SimCLR** | 34.25% | 60.22% (Linear) / 54.92% (k-NN) | +76% |
-| **MAE** | 25.08% | 58.12% (Linear) / 36.34% (k-NN) | +132% |
-| **DINO** | - | 64.06% (Linear) / 56.16% (k-NN) | **NEW** ✓ |
+A comprehensive implementation of modern self-supervised learning methods for visual representation learning. This repository includes three state-of-the-art SSL methods with pre-trained models.
 
 ## Featured Methods
 
@@ -16,22 +8,16 @@ A comprehensive implementation of modern self-supervised learning methods for vi
 - **Best performance**: 64.06% linear evaluation accuracy
 - Vision Transformer backbone with self-distillation
 - Momentum encoder with EMA updates
-- 1000 epochs training (432 epochs actual with early stopping)
-- **Key innovation**: Student-teacher paradigm with prototypical features
 
 ### 2. **SimCLR** - Contrastive Learning
 - **High performance**: 60.22% linear evaluation accuracy
 - Simplified contrastive learning framework
-- 1000 epochs training (976 epochs actual with early stopping)
 - Temperature-scaled contrastive loss
-- **Key innovation**: Large batch sizes for contrastive pairs
 
 ### 3. **MAE** - Masked Autoencoders
-- **Solid performance**: 58.12% linear evaluation accuracy
-- Vision Transformer with masked patch reconstruction
-- 75% masking ratio
-- 600 epochs training (completed all 610 epochs)
-- **Key innovation**: Asymmetric encoder-decoder architecture
+- **Decent performance**: 58.12% linear evaluation accuracy
+- Vision Transformer with masked patch reconstruction and 75% masking ratio
+- Asymmetric encoder-decoder architecture
 
 ## Installation
 
@@ -54,10 +40,14 @@ pip install -r requirements.txt
 nano config.yaml
 ```
 
-???+ tip "GPU Memory Requirements"
-    - DINO: ~24GB (batch size 96)
-    - SimCLR: ~16GB (batch size 128)
-    - MAE: ~16GB (batch size 256)
+<details>
+<summary>GPU Memory Requirements</summary>
+
+- DINO: ~24GB (batch size 96)
+- SimCLR: ~16GB (batch size 128)
+- MAE: ~16GB (batch size 256)
+
+</details>
 
 ## Dataset Preparation
 
@@ -72,12 +62,7 @@ ssl_dataset/
 
 Download the dataset:
 
-```bash
-pip install gdown
-python data/download.py  # Downloads and extracts dataset
-```
-
-Alternatively, manually download from [Google Drive](https://drive.google.com/uc?id=1BVpkgbxN21kTcIGsv4T7zIyT2egxIufK):
+Manually download from [Google Drive](https://drive.google.com/file/d/1--11Usx6nRxI1v3EJ6Qd4LQ2WJJwbqP8):
 
 ```bash
 unzip ssl_dataset_resized.zip -d ./ssl_dataset/
@@ -138,48 +123,32 @@ python eval.py --method dino --visualize
 
 ## Results
 
-### Detailed Performance Metrics
+### Evaluation Metrics
 
 #### DINO
 - **k-NN Accuracy (k=20)**: 56.16%
 - **Linear Probe Accuracy**: 64.06%
-- **Training**: 432 epochs (early stopped from 1000)
-- **Training Loss**: 0.6237 (final)
-- **Training Duration**: ~6 days (GPU)
+- **Training Loss**: 0.6237
+- **Training Duration**: ~6 days (Nvidia TITAN RTX GPU)
 - **Model Size**: 843 MB
 
 #### SimCLR
 - **k-NN Accuracy (k=20)**: 54.92%
 - **Linear Probe Accuracy**: 60.22%
-- **Training**: 976 epochs (early stopped from 1000)
-- **Training Loss**: 0.0236 (final)
-- **Training Duration**: ~9 days (GPU)
+- **Training Loss**: 0.0236
+- **Training Duration**: ~9 days (Nvidia TITAN RTX GPU)
 - **Model Size**: 331 MB
 
 #### MAE
 - **k-NN Accuracy (k=20)**: 36.34%
 - **Linear Probe Accuracy**: 58.12%
-- **Training**: 610 epochs (completed all planned)
-- **Training Loss**: 0.0118 (final, stable)
-- **Training Duration**: ~4 days (GPU)
+- **Training Loss**: 0.0118
+- **Training Duration**: ~4 days (Nvidia TITAN RTX GPU)
 - **Model Size**: 405 MB
 
-### Visualization Results
+### Visualizations
 
-All models generate comprehensive visualizations:
-
-#### DINO
-<img src="results/dino/tsne.png" width="300" alt="DINO t-SNE">
-<img src="results/dino/umap.png" width="300" alt="DINO UMAP">
-<img src="results/dino/attention_map_masks_high_contrast.png" width="300" alt="DINO Attention Maps">
-
-#### SimCLR
-<img src="results/simclr/tsne.png" width="300" alt="SimCLR t-SNE">
-<img src="results/simclr/umap.png" width="300" alt="SimCLR UMAP">
-
-#### MAE
-<img src="results/mae/reconstruction.png" width="300" alt="MAE Reconstruction">
-<img src="results/mae/tsne.png" width="300" alt="MAE t-SNE">
+Generated visualizations available in `results/` directory for each method.
 
 ## Architecture
 
@@ -237,15 +206,13 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed architectural information.
 
 ✅ **Comprehensive Evaluation**: k-NN and Linear Probe evaluation metrics
 
-✅ **High-Quality Visualizations**: t-SNE, UMAP, and attention map visualizations
+✅ **Visualizations**: t-SNE and UMAP visualizations
 
 ✅ **Clean Codebase**: Modular design with easy-to-follow implementation
 
 ✅ **Extensive Logging**: Detailed training logs for each method
 
 ✅ **Flexible Configuration**: YAML-based config for easy customization
-
-✅ **Production-Ready**: Tested and validated models with documented results
 
 ## Configuration
 
@@ -348,21 +315,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Citation
 
-If you use this project in your research, please cite:
-
-```bibtex
-@misc{gopalani2025ssl,
-  title={Self-Supervised Visual Representation Learning},
-  author={Gopalani, Tanishk},
-  year={2025},
-  howpublished={GitHub Repository},
-  url={https://github.com/tanishk-ou/ssl_project}
-}
-```
-
-And cite the original papers for each method you use.
+Cite the original papers for each method you use.
 
 ---
 
 **Last Updated**: March 26, 2026
-**Status**: Production Ready ✓
+**Status**: Implementation Complete
