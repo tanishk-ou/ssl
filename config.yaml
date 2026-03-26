@@ -1,0 +1,16 @@
+# Self-Supervised Learning Configuration
+# Edit this file to customize paths and settings for your environment
+
+# Data and checkpoint paths
+data_path: "./ssl_dataset"
+checkpoint_path: "./checkpoints"
+results_path: "./results"
+
+# Device settings
+device: "cuda"  # Use "cuda" for GPU or "cpu" for CPU
+
+# Dataset settings
+num_classes: 100
+
+# Logging
+log_level: "INFO"

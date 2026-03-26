@@ -1,0 +1,26 @@
+{
+  "method": "mae",
+  "k_nn_accuracy": 0.3634,
+  "linear_probe_accuracy": 0.5812,
+  "training_config": {
+    "epochs": 600,
+    "actual_epochs": 610,
+    "batch_size": 256,
+    "learning_rate": 0.00015,
+    "weight_decay": 0.05,
+    "mask_ratio": 0.75
+  },
+  "training_metrics": {
+    "final_loss": 0.0118,
+    "total_steps": 225600,
+    "training_duration_days": 4
+  },
+  "dataset": {
+    "train_size": 130000,
+    "val_size": 5000,
+    "num_classes": 100
+  },
+  "device": "cuda:0",
+  "evaluation_date": "2025-09-19",
+  "notes": "MAE completed all 610 epochs. Stable training curve with consistent loss reduction."
+}

@@ -1,0 +1,27 @@
+{
+  "method": "simclr",
+  "k_nn_accuracy": 0.5492,
+  "linear_probe_accuracy": 0.6022,
+  "training_config": {
+    "epochs": 1000,
+    "actual_epochs": 976,
+    "batch_size": 128,
+    "learning_rate": 0.0003,
+    "temperature": 0.5,
+    "weight_decay": 1e-6,
+    "projection_dim": 256
+  },
+  "training_metrics": {
+    "final_loss": 0.0236,
+    "total_steps": 752000,
+    "training_duration_days": 9
+  },
+  "dataset": {
+    "train_size": 130000,
+    "val_size": 5000,
+    "num_classes": 100
+  },
+  "device": "cuda:0",
+  "evaluation_date": "2025-09-28",
+  "notes": "SimCLR achieved second highest accuracy. Early stopping was applied at epoch 976."
+}

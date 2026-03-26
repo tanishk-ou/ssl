@@ -1,0 +1,31 @@
+{
+  "method": "dino",
+  "k_nn_accuracy": 0.5616,
+  "linear_probe_accuracy": 0.6406,
+  "training_config": {
+    "epochs": 1000,
+    "actual_epochs": 432,
+    "batch_size": 96,
+    "learning_rate": 0.0005,
+    "weight_decay_start": 0.04,
+    "weight_decay_end": 0.4,
+    "momentum_start": 0.996,
+    "momentum_end": 1.0,
+    "student_temp": 0.1,
+    "teacher_temp_start": 0.04,
+    "teacher_temp_end": 0.07
+  },
+  "training_metrics": {
+    "final_loss": 0.6237,
+    "total_steps": 1003000,
+    "training_duration_days": 5
+  },
+  "dataset": {
+    "train_size": 130000,
+    "val_size": 5000,
+    "num_classes": 100
+  },
+  "device": "cuda:0",
+  "evaluation_date": "2025-10-09",
+  "notes": "DINO achieved the highest accuracy among all methods. Early stopping was applied at epoch 432."
+}
