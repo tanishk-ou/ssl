@@ -146,9 +146,61 @@ python eval.py --method dino --visualize
 - **Training Duration**: ~4 days (Nvidia TITAN RTX GPU)
 - **Model Size**: 405 MB
 
-### Visualizations
+### Visual Results
 
-Generated visualizations available in `results/` directory for each method.
+#### DINO — Self-Attention Maps
+
+The DINO encoder learns to attend to semantically meaningful regions without any labels. The attention maps below show the model focusing on object boundaries and salient parts (heads, bodies, distinguishing features):
+
+<p align="center">
+  <img src="results/dino/attention_map_masks_high_contrast.png" width="700" alt="DINO high-contrast attention maps showing object-aware attention"/>
+</p>
+
+Multi-layer attention aggregation reveals how early, mid, and late transformer layers contribute complementary spatial information (R=Early, G=Mid, B=Late), alongside overall attention intensity:
+
+<p align="center">
+  <img src="results/dino/attention_map_masks_no_overlap.png" width="700" alt="DINO multi-layer attention aggregation (RGB per-layer, Plasma intensity)"/>
+</p>
+
+#### MAE — Masked Reconstruction
+
+The MAE model learns rich visual representations by reconstructing images from only 25% of visible patches. Below are original images alongside their reconstructions from the heavily masked input:
+
+<p align="center">
+  <img src="results/mae/mae_reconstruction.png" width="700" alt="MAE reconstruction results — original vs reconstructed from 25% visible patches"/>
+</p>
+
+#### Feature Space Embeddings
+
+t-SNE and UMAP projections of the learned feature spaces show how well each method clusters semantically similar images. Distinct color clusters indicate the model has learned meaningful class-separable representations without supervision.
+
+**DINO** (best separation — clear cluster formation):
+
+| t-SNE | UMAP |
+|:---:|:---:|
+| ![DINO t-SNE](results/dino/tsne.png) | ![DINO UMAP](results/dino/umap.png) |
+
+**SimCLR** (strong contrastive clustering):
+
+| t-SNE | UMAP |
+|:---:|:---:|
+| ![SimCLR t-SNE](results/simclr/tsne.png) | ![SimCLR UMAP](results/simclr/umap.png) |
+
+**MAE** (generative — more diffuse embeddings, still structured):
+
+| t-SNE | UMAP |
+|:---:|:---:|
+| ![MAE t-SNE](results/mae/tsne.png) | ![MAE UMAP](results/mae/umap.png) |
+
+### Training Logs
+
+Complete training logs for all three methods are in the [`logs/`](logs/) directory, providing epoch-by-epoch loss values and timestamps from the actual training runs:
+
+| Method | Log File | Epochs | Training Period | GPU Time |
+|--------|----------|--------|-----------------|----------|
+| **DINO** | [`logger_dino.log`](logs/logger_dino.log) | 432 (early stopped) | Sep 30 – Oct 5, 2025 | ~6 days |
+| **MAE** | [`logger_mae.log`](logs/logger_mae.log) | 600 | Sep 15 – Sep 19, 2025 | ~4 days |
+| **SimCLR** | [`logger_simclr.log`](logs/logger_simclr.log) | 976 (early stopped) | Sep 19 – Sep 28, 2025 | ~9 days |
 
 ## Architecture
 
@@ -194,6 +246,11 @@ ssl-project/
     ├── dino/
     ├── simclr/
     └── mae/
+│
+├── logs/                    # Raw training logs (proof of training)
+│   ├── logger_dino.log
+│   ├── logger_mae.log
+│   └── logger_simclr.log
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed architectural information.

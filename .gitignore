@@ -21,9 +21,10 @@ Thumbs.db
 # Dataset
 ssl_dataset/
 
-# Logs
+# Logs (ignore stray logs, but track training logs in logs/)
 *.log
-logs/
+!logs/
+!logs/*.log
 
 # Local results (not committed)
 results_local/
